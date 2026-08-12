@@ -18,16 +18,16 @@ jobs:
       with:
         python-version: '3.10'
 
-    - name: Install Dependencies
+    - name: Install System Dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential ccache git libffi-dev libssl-dev python3-dev zip unzip openjdk-17-jdk ffmpeg
+        sudo apt-get install -y build-essential ccache git libffi-dev libssl-dev python3-dev zip unzip openjdk-17-jdk ffmpeg autoconf libtool pkg-config zlib1g-dev libncurses5-dev libncursesw5-dev libreadline-dev libgdbm-dev libsqlite3-dev libdb5.3-dev libbz2-dev libexpat1-dev liblzma-dev wget curl
         pip install --upgrade pip
         pip install "cython<3.0.0" buildozer setuptools
 
     - name: Build APK with Buildozer
       run: |
-        yes | buildozer -v android debug
+        buildozer -v android debug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
